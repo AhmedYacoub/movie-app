@@ -1,6 +1,7 @@
 <script setup>
 // import Welcome from '@/Layouts/Welcome.vue';
 import AdminLayout from "../../Layouts/AdminLayout.vue";
+import AdminWelcome from "./AdminWelcome.vue";
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import AdminLayout from "../../Layouts/AdminLayout.vue";
         <div class="py-12">
             <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div class="overflow-hidden bg-white shadow-xl sm:rounded-lg">
-                    <!-- <Welcome /> -->
+                    <AdminWelcome />
                 </div>
             </div>
         </div>

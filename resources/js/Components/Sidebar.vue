@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { Link } from "@inertiajs/inertia-vue3";
 const sidebarOpen = ref(true);
 </script>
 
@@ -45,9 +46,9 @@ const sidebarOpen = ref(true);
         </div>
 
         <nav class="mt-10">
-            <a
+            <Link
                 class="flex items-center px-6 py-2 mt-4 text-gray-100 bg-gray-700 bg-opacity-25"
-                href="#"
+                :href="route('admin.index')"
             >
                 <svg
                     class="w-6 h-6"
@@ -71,11 +72,11 @@ const sidebarOpen = ref(true);
                 </svg>
 
                 <span class="mx-3">Dashboard</span>
-            </a>
+            </Link>
 
-            <a
+            <Link
                 class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                href="#"
+                :href="route('admin.movies.index')"
             >
                 <svg
                     class="w-6 h-6"
@@ -93,10 +94,10 @@ const sidebarOpen = ref(true);
                 </svg>
 
                 <span class="mx-3">Movies</span>
-            </a>
-            <a
+            </Link>
+            <Link
                 class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                href="#"
+                :href="route('admin.tv-shows.index')"
             >
                 <svg
                     class="w-6 h-6"
@@ -113,11 +114,11 @@ const sidebarOpen = ref(true);
                     />
                 </svg>
 
-                <span class="mx-3">Series</span>
-            </a>
-            <a
+                <span class="mx-3">TV Shows</span>
+            </Link>
+            <Link
                 class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                href="#"
+                :href="route('admin.genres.index')"
             >
                 <svg
                     class="w-6 h-6"
@@ -135,10 +136,10 @@ const sidebarOpen = ref(true);
                 </svg>
 
                 <span class="mx-3">Genres</span>
-            </a>
-            <a
+            </Link>
+            <Link
                 class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                href="#"
+                :href="route('admin.cast.index')"
             >
                 <svg
                     class="w-6 h-6"
@@ -156,10 +157,10 @@ const sidebarOpen = ref(true);
                 </svg>
 
                 <span class="mx-3">Casts</span>
-            </a>
-            <a
+            </Link>
+            <Link
                 class="flex items-center px-6 py-2 mt-4 text-gray-500 hover:bg-gray-700 hover:bg-opacity-25 hover:text-gray-100"
-                href="#"
+                :href="route('admin.tags.index')"
             >
                 <svg
                     class="w-6 h-6"
@@ -177,7 +178,7 @@ const sidebarOpen = ref(true);
                 </svg>
 
                 <span class="mx-3">Tags</span>
-            </a>
+            </Link>
         </nav>
     </div>
 </template>

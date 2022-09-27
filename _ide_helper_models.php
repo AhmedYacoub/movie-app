@@ -12,6 +12,94 @@
 
 namespace App\Models{
 /**
+ * App\Models\Cast
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Cast newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cast newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Cast query()
+ */
+	class Cast extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Episode
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Episode newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Episode newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Episode query()
+ */
+	class Episode extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Genre
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Genre newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Genre newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Genre query()
+ */
+	class Genre extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Movie
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Movie query()
+ */
+	class Movie extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Season
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Season newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Season newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Season query()
+ */
+	class Season extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Tag
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Tag newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tag newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Tag query()
+ */
+	class Tag extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\Trailer
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|Trailer newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Trailer newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|Trailer query()
+ */
+	class Trailer extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
+ * App\Models\TvShow
+ *
+ * @method static \Illuminate\Database\Eloquent\Builder|TvShow newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TvShow newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|TvShow query()
+ */
+	class TvShow extends \Eloquent {}
+}
+
+namespace App\Models{
+/**
  * App\Models\User
  *
  * @property int $id
