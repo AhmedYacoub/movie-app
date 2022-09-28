@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class TagsController extends Controller
 {
-    //
+    public function index()
+    {
+        return inertia('Admin/Tags/Index');
+    }
 }

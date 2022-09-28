@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class MoviesController extends Controller
 {
-    //
+    public function index()
+    {
+        return inertia('Admin/Movies/Index');
+    }
 }
