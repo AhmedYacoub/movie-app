@@ -1,10 +1,33 @@
 <script setup>
 import AdminLayout from "../../../Layouts/AdminLayout.vue";
 import { Link } from "@inertiajs/inertia-vue3";
+import { ref, watch, defineProps } from "vue";
+import Pagination from "../Components/Pagination.vue";
+import { Inertia } from "@inertiajs/inertia";
 
 const props = defineProps({
-    tags: Object,
+    tags: Object, // pagination object.
+    filters: Object,
 });
+
+const search = ref(props.filters.search);
+const perPage = ref(5);
+
+watch(search, (value) => {
+    Inertia.get(
+        route("admin.tags.index"),
+        { search: value, perPage: perPage.value },
+        { preserveState: true, replace: true }
+    );
+});
+
+function getTags() {
+    Inertia.get(
+        route("admin.tags.index"),
+        { perPage: perPage.value, search: search.value },
+        { preserveState: true, replace: true }
+    );
+}
 </script>
 
 <template>
@@ -47,6 +70,7 @@ const props = defineProps({
                                 </div>
 
                                 <input
+                                    v-model="search"
                                     type="text"
                                     placeholder="Search by title"
                                     class="w-full px-8 py-3 text-sm bg-gray-100 border-transparent rounded-md md:w-2/6 focus:border-gray-500 focus:bg-white focus:ring-0"
@@ -75,6 +99,8 @@ const props = defineProps({
                                     </select>
 
                                     <select
+                                        v-model="perPage"
+                                        @change="getTags"
                                         class="w-full px-4 py-3 text-sm bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
                                     >
                                         <option value="5">5 Per Page</option>
@@ -127,17 +153,7 @@ const props = defineProps({
                                 </tbody>
                             </table>
                             <div class="p-2 m-2">
-                                <Link
-                                    v-for="link in tags.links"
-                                    :href="link.url"
-                                    v-html="link.label"
-                                    :key="link"
-                                    class="px-3 py-2 mx-1 my-1 text-sm leading-4 text-gray-500 border"
-                                    :class="{
-                                        'text-gray-400': !link.url,
-                                        'font-bold bg-gray-100': link.active,
-                                    }"
-                                />
+                                <Pagination :links="tags.links" />
                             </div>
                         </div>
                     </div>

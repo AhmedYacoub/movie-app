@@ -14,12 +14,26 @@ class TagsController extends Controller
      *
      * @return Inertia\Response
      */
-    public function index(): \Inertia\Response
+    public function index(Request $request): \Inertia\Response
     {
-        $tags = Tag::paginate(5);
+        $request->validate([
+            'search' => ['nullable', 'string'],
+            'perPage' => ['nullable', 'integer'],
+        ]);
 
-        return inertia('Admin/Tags/Index')
-            ->with('tags', $tags);
+        $search = $request->query('search');
+        $perPage = $request->query('perPage') ?: 5;
+
+        $tags = Tag::query()
+            ->when($search, function ($query, $search) {
+                $query->where('name', 'like', "%{$search}%");
+            })->paginate($perPage)
+            ->withQueryString();
+
+        return inertia('Admin/Tags/Index', [
+            'tags' => $tags,
+            'filters' => $request->only('search', 'perPage'),
+        ]);
     }
 
     /**
@@ -66,6 +80,6 @@ class TagsController extends Controller
 
         return redirect()
             ->route('admin.tags.index')
-            ->with('flash.banner', 'Tag `'. $tag->name .'` created successfully.');
+            ->with('flash.banner', 'Tag `' . $tag->name . '` created successfully.');
     }
 }
