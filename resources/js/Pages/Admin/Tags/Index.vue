@@ -4,6 +4,8 @@ import { Link } from "@inertiajs/inertia-vue3";
 import { ref, watch, defineProps } from "vue";
 import Pagination from "../Components/Pagination.vue";
 import { Inertia } from "@inertiajs/inertia";
+import debounce from "lodash/debounce";
+import { PencilSquareIcon, TrashIcon } from "@heroicons/vue/24/solid";
 
 const props = defineProps({
     tags: Object, // pagination object.
@@ -13,13 +15,16 @@ const props = defineProps({
 const search = ref(props.filters.search);
 const perPage = ref(5);
 
-watch(search, (value) => {
-    Inertia.get(
-        route("admin.tags.index"),
-        { search: value, perPage: perPage.value },
-        { preserveState: true, replace: true }
-    );
-});
+watch(
+    search,
+    debounce((value) => {
+        Inertia.get(
+            route("admin.tags.index"),
+            { search: value, perPage: perPage.value },
+            { preserveState: true, replace: true }
+        );
+    }, 300)
+);
 
 function getTags() {
     Inertia.get(
@@ -137,17 +142,39 @@ function getTags() {
                                             {{ tag.slug }}
                                         </td>
 
-                                        <td class="px-4 py-3 text-sm border">
-                                            <button
-                                                class="px-4 py-2 mx-1 text-white bg-green-500 rounded-sm hover:bg-green-700"
+                                        <td
+                                            class="flex px-4 py-3 text-sm border"
+                                        >
+                                            <Link
+                                                :href="
+                                                    route(
+                                                        'admin.tags.edit',
+                                                        tag.id
+                                                    )
+                                                "
+                                                title="Edit"
                                             >
-                                                Edit
-                                            </button>
-                                            <button
-                                                class="px-4 py-2 mx-1 text-white bg-red-500 rounded-sm hover:bg-red-700"
+                                                <PencilSquareIcon
+                                                    class="w-8 h-8 p-2 mx-1 text-white bg-green-500 rounded-md hover:bg-green-700"
+                                                    title="Edit"
+                                                />
+                                            </Link>
+                                            <Link
+                                                :href="
+                                                    route(
+                                                        'admin.tags.destroy',
+                                                        tag.id
+                                                    )
+                                                "
+                                                method="delete"
+                                                as="button"
+                                                type="button"
+                                                title="Delete"
                                             >
-                                                Delete
-                                            </button>
+                                                <TrashIcon
+                                                    class="w-8 h-8 p-2 mx-1 text-white bg-red-500 rounded-md hover:bg-red-700"
+                                                />
+                                            </Link>
                                         </td>
                                     </tr>
                                 </tbody>
