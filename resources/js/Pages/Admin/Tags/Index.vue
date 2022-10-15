@@ -14,6 +14,7 @@ const props = defineProps({
 
 const search = ref(props.filters.search);
 const perPage = ref(5);
+const orderBy = ref('ASC');
 
 watch(
     search,
@@ -26,10 +27,10 @@ watch(
     }, 300)
 );
 
-function getTags() {
+function getData() {
     Inertia.get(
         route("admin.tags.index"),
-        { perPage: perPage.value, search: search.value },
+        { perPage: perPage.value, search: search.value, orderBy: orderBy.value },
         { preserveState: true, replace: true }
     );
 }
@@ -85,11 +86,12 @@ function getTags() {
                             <div class="flex justify-between mt-4">
                                 <p class="font-medium">Filters</p>
 
-                                <button
+                                <Link
+                                    :href="route('admin.tags.index')"
                                     class="px-4 py-2 text-sm font-medium text-gray-800 bg-gray-100 rounded-md hover:bg-gray-200"
                                 >
                                     Reset Filter
-                                </button>
+                                </Link>
                             </div>
 
                             <div>
@@ -97,15 +99,17 @@ function getTags() {
                                     class="flex justify-between mt-4 space-x-4"
                                 >
                                     <select
+                                        v-model="orderBy"
+                                        @change="getData"
                                         class="w-full px-4 py-3 text-sm bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
                                     >
-                                        <option value="asc">Asc</option>
-                                        <option value="desc">Desc</option>
+                                        <option value="ASC">Asc</option>
+                                        <option value="DESC">Desc</option>
                                     </select>
 
                                     <select
                                         v-model="perPage"
-                                        @change="getTags"
+                                        @change="getData"
                                         class="w-full px-4 py-3 text-sm bg-gray-100 border-transparent rounded-md focus:border-gray-500 focus:bg-white focus:ring-0"
                                     >
                                         <option value="5">5 Per Page</option>
@@ -137,7 +141,7 @@ function getTags() {
                                             {{ tag.name }}
                                         </td>
                                         <td
-                                            class="px-4 py-3 font-semibold border text-ms"
+                                            class="px-4 py-3 text-sm font-semibold border"
                                         >
                                             {{ tag.slug }}
                                         </td>

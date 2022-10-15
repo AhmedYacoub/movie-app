@@ -17,22 +17,28 @@ class TagsController extends Controller
     public function index(Request $request): \Inertia\Response
     {
         $request->validate([
-            'search' => ['nullable', 'string'],
+            'search' => ['nullable', 'string', 'max:190'],
             'perPage' => ['nullable', 'integer'],
+            'orderBy' => ['nullable', 'string', 'in:ASC,DESC']
         ]);
 
         $search = $request->query('search');
         $perPage = $request->query('perPage') ?: 5;
+        $orderBy = $request->query('orderBy') ?: 'ASC';
 
         $tags = Tag::query()
             ->when($search, function ($query, $search) {
                 $query->where('name', 'like', "%{$search}%");
-            })->paginate($perPage)
+            })
+            ->when($orderBy, function ($query, $orderBy) {
+                $query->orderBy('id', $orderBy);
+            })
+            ->paginate($perPage)
             ->withQueryString();
 
         return inertia('Admin/Tags/Index', [
             'tags' => $tags,
-            'filters' => $request->only('search', 'perPage'),
+            'filters' => $request->only('search', 'perPage', 'orderBy'),
         ]);
     }
 
